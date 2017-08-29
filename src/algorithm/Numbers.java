@@ -1,8 +1,5 @@
 package algorithm;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 import databases.ConnectDB;
 
@@ -17,11 +14,10 @@ public class Numbers {
 	 *
 	 * Use any databases[MongoDB, Oracle, MySql] to store data and retrieve data.
 	 */
-
 	public static void main(String[] args) throws Exception {
-		
+
 		int [] num = new int[100];
-		
+
 		Random rand = new Random();
 		for(int i=0; i<num.length; i++){
 			num[i] = rand.nextInt(1000);
@@ -33,11 +29,11 @@ public class Numbers {
 		algo.selectionSort(num);
 		long selectionSortExecutionTime = algo.executionTime;
 		System.out.println("Total Execution Time of "+ num.length + " numbers in Selection Sort take: " + selectionSortExecutionTime + " milli sec");
-        connectDB.InsertDataFromArryToMySql(num, "selection_sort", "SortingNumbers");
-        List<String> numbers = connectDB.readDataBase("selection_sort", "SortingNumbers");
-        for(String st:numbers){
-        	System.out.println(st);
-        }
+		connectDB.InsertDataFromArryToMySql(num, "selection_sort", "SortingNumbers");
+		List<String> numbers = connectDB.readDataBase("selection_sort", "SortingNumbers");
+		for(String st:numbers){
+			System.out.println(st);
+		}
 		int n = num.length;
 		randomize (num, n);
 		//Insertion Sort
@@ -61,6 +57,4 @@ public class Numbers {
 			arr[j] = temp;
 		}
 	}
-
-
 }

@@ -1,12 +1,5 @@
 package databases;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
-import com.mongodb.client.FindIterable;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import com.mongodb.connection.*;
 import org.bson.Document;
 
 import java.io.FileInputStream;
@@ -16,14 +9,13 @@ import java.io.InputStream;
 import java.sql.*;
 import java.sql.Connection;
 import java.util.*;
+import java.lang.*;
 
 /**
  * Created by mrahman on 04/22/17.
  */
 
 public class ConnectDB {
-
-    public static MongoDatabase mongoDatabase = null;
 
     public static Connection connect = null;
     public static Statement statement = null;
@@ -48,13 +40,7 @@ public class ConnectDB {
         System.out.println("Database is connected");
         return connect;
     }
-    public static MongoDatabase connectToMongoDB() {
-        MongoClient mongoClient = new MongoClient();
-        mongoDatabase = mongoClient.getDatabase("students");
-        System.out.println("Database Connected");
 
-        return mongoDatabase;
-    }
     public List<String> readDataBase(String tableName, String columnName)throws Exception{
         List<String> data = new ArrayList<String>();
 
@@ -168,48 +154,14 @@ public class ConnectDB {
         }
     }
 
-    public static String insertToMongoDB(User user){
-        String profile = user.getName();
-        MongoDatabase mongoDatabase = connectToMongoDB();
-        MongoCollection<Document> collection = mongoDatabase.getCollection("profile");
-        Document document = new Document().append("name",user.getName()).append("id", user.getId());
-        collection.insertOne(document);
-        return profile + " has been registered";
-    }
-
-    public static List<User> readFromMongoDB(){
-        List<User> list = new ArrayList<User>();
-        User user = new User();
-        MongoDatabase mongoDatabase = connectToMongoDB();
-        MongoCollection<Document> collection = mongoDatabase.getCollection("profile");
-        BasicDBObject basicDBObject = new BasicDBObject();
-        FindIterable<Document> iterable = collection.find(basicDBObject);
-        for(Document doc:iterable){
-            String id = "";
-            int idInt = 0;
-            String name = (String)doc.get("name");
-            user.setName(name);
-            try {
-                id = (String) doc.get("id");
-                int convertId = Integer.parseInt(id);
-                user.setId(convertId);
-            }catch(Exception ex){
-                idInt = (int) doc.get("id");
-                user.setId(idInt);
-            }
-            user = new User(user.getName(),user.getId());
-            list.add(user);
-        }
-        return list;
-    }
     public static void insertProfileToMySql(String tableName, String columnName1, String columnName2)
     {
         try {
             connectToMySql();
-                ps = connect.prepareStatement("INSERT INTO "+tableName+" ( " + columnName1 + "," + columnName2 + " ) VALUES(?,?)");
-                ps.setString(1,"Ankita Sing");
-                ps.setInt(2,3590);
-                ps.executeUpdate();
+            ps = connect.prepareStatement("INSERT INTO "+tableName+" ( " + columnName1 + "," + columnName2 + " ) VALUES(?,?)");
+            ps.setString(1,"Ankita Sing");
+            ps.setInt(2,3590);
+            ps.executeUpdate();
 
 
         } catch (IOException e) {
@@ -225,41 +177,37 @@ public class ConnectDB {
         List<User> list = new ArrayList<>();
         User user = null;
         try{
-        Connection conn = connectToMySql();
-        String query = "SELECT * FROM profile";
-        // create the java statement
-        Statement st = conn.createStatement();
-        // execute the query, and get a java resultset
-        ResultSet rs = st.executeQuery(query);
-        // iterate through the java resultset
-        while (rs.next())
-        {
-            String name = rs.getString("name");
-            int id = rs.getInt("id");
-            //System.out.format("%s, %s\n", name, id);
-            user = new User(name,id);
-            list.add(user);
+            Connection conn = connectToMySql();
+            String query = "SELECT * FROM profile";
+            // create the java statement
+            Statement st = conn.createStatement();
+            // execute the query, and get a java resultset
+            ResultSet rs = st.executeQuery(query);
+            // iterate through the java resultset
+            while (rs.next())
+            {
+                String name = rs.getString("name");
+                int id = rs.getInt("id");
+                //System.out.format("%s, %s\n", name, id);
+                user = new User(name,id);
+                list.add(user);
 
+            }
+            st.close();
+        }catch (Exception e){
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
         }
-        st.close();
-       }catch (Exception e){
-           System.err.println("Got an exception! ");
-           System.err.println(e.getMessage());
-         }
-       return list;
+        return list;
     }
 
     public static void main(String[] args)throws IOException, SQLException, ClassNotFoundException {
 
-    	
+
         insertProfileToMySql("profile","name", "id");
         List<User> list = readFromMySql();
         for(User user:list){
             System.out.println(user.getName()+ " " + user.getId());
         }
-        String message = insertToMongoDB(new User("Tanima Chowdhury", 3539));
-        List<User> user = readFromMongoDB();
-
     }
-
 }
