@@ -98,8 +98,9 @@ Big O specifically describes the worst-case scenario, and can be used to describ
 space used (e.g. in memory or on disk) by an algorithm.
 
 Outlined different kind of sorting algorithm with time complexity?
-Efficient sorts[edit] Practical general sorting algorithms are almost always based on an algorithm with average time complexity
-(and generally worst-case complexity) O(n log n), of which the most common are heap sort, merge sort, and quicksort.
+Efficient sorts, practical general sorting algorithms are almost always based on an algorithm with average time complexity
+(and generally worst-case complexity) O(n log n), of which the most common are heap sort, merge sort, and quick sort.
+QuickSort- O(nlog(n)), MergeSort- O(nlog(n)), HeapSort- O(nlog(n)), InsertionSort- O(n^2), and SelectionSort-O(n^2)
 
 Draw a table with time complexity in which it will summarize all the data structure feature's advantages and disadvantages.
   a)In terms of Accessing element.

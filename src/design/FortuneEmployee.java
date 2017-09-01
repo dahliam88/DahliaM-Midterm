@@ -1,6 +1,10 @@
 package design;
+import databases.ConnectDB;
+
 import java.util.*;
 import java.lang.*;
+
+import static databases.ConnectDB.connect;
 
 public class FortuneEmployee {
 
@@ -16,6 +20,8 @@ public class FortuneEmployee {
 	 *
 	 **/
 	public static void main(String[] args) {
+
+		ConnectDB connectDB = new ConnectDB();
 
 		EmployeeInfo employee1 = new EmployeeInfo(1,"Dahlia");
 		EmployeeInfo employee2 = new EmployeeInfo(2,"Avery");
@@ -39,6 +45,5 @@ public class FortuneEmployee {
 
 		EmployeeInfo.calculateEmployeePension(employee3.getSalary());
 	}
-
 
 	}

@@ -1,35 +1,35 @@
 package datastructure;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import databases.ConnectDB;
+
+import java.util.*;
 
 
 public class UseArrayList {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		/*
 		 * Demonstrate how to use ArrayList that includes add,peek,remove,retrieve elements.
 		 * Use For Each loop and while loop with Iterator to retrieve data.
 		 * Store all the sorted data into one of the databases.
-		 * 
+		 * s
 		 */
-		ArrayList<String> list = new ArrayList<>();
-		list.add("apples");
-		list.add("oranges");
-		list.add("bananas");
-		list.add("grapes");
+		ConnectDB connectDB = new ConnectDB();
+		ArrayList<Object> fruitList = new ArrayList<>();
+		fruitList.add("apples");
+		fruitList.add("oranges");
+		fruitList.add("bananas");
+		fruitList.add("grapes");
 
-		list.remove (1);
+		fruitList.remove (fruitList.size()-1);
 
-		Iterator<String> it = list.listIterator();
+		Iterator it = fruitList.listIterator();
 		while (it.hasNext()){
 			System.out.println(it.next());
 		}
-		list.remove("oranges");
-		for (String st: list);
-		System.out.println(list);
 
-
+        connectDB.InsertDataFromArrayListToMySql(fruitList, "Fruit_List", "Fruit");
+		connectDB.readDataBase("Fruit_List", "Fruit");
 	}
 
 }

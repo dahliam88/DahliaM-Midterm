@@ -17,10 +17,11 @@ public class DataReader {
 		 //*
         String textFile = System.getProperty("user.dir") + "/src/data/self-driving-car";
 
-        BufferedReader br = new BufferedReader( new FileReader(textFile) );
-        String text = "";
-        while ((text = br.readLine()) != null) {
-                System.out.println(text);;
+        FileReader fr = new FileReader(textFile);
+        BufferedReader br = new BufferedReader(fr);
+        String line = "";
+        while ((line = br.readLine()) != null) {
+                System.out.println(line);;
         }
         br.close();
 

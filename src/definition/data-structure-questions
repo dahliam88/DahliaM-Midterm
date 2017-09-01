@@ -40,7 +40,8 @@ FIFO - orders elements on the basis of the first in first out principle. The fir
 LIFO - orders elements on the basis of the last in, first out principle. The last element is removed first, and the first element gets removed last.
 
 What is the order of complexity?
-
+The order of complexity is shown When you optimize code for speed. If an input requires size of N in the code, then
+it will have O(N) complexity.
 
 what is the best case to search an element from an array?
 Merge sort is the best.
@@ -74,6 +75,7 @@ What is ArrayIndexOutOfBoundsException in java? When it occurs?
 This exception is thrown when you try to access an array item that doesn't exist:
 
 What are the different ways of copying an array into another array?
+You can copy an array into another array by creating the new array, copying the first array, and then storing the values into the new array.
 
 What is difference between an array and a linked list?
 In array, each element is independent, no connection with previous element or with its location.
@@ -98,8 +100,9 @@ Big O specifically describes the worst-case scenario, and can be used to describ
 space used (e.g. in memory or on disk) by an algorithm.
 
 Outlined different kind of sorting algorithm with time complexity?
-Efficient sorts[edit] Practical general sorting algorithms are almost always based on an algorithm with average time complexity
-(and generally worst-case complexity) O(n log n), of which the most common are heap sort, merge sort, and quicksort.
+Efficient sorts, practical general sorting algorithms are almost always based on an algorithm with average time complexity
+(and generally worst-case complexity) O(n log n), of which the most common are heap sort, merge sort, and quick sort.
+QuickSort- O(nlog(n)), MergeSort- O(nlog(n)), HeapSort- O(nlog(n)), InsertionSort- O(n^2), and SelectionSort-O(n^2)
 
 Draw a table with time complexity in which it will summarize all the data structure feature's advantages and disadvantages.
   a)In terms of Accessing element.

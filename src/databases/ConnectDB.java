@@ -80,7 +80,7 @@ public class ConnectDB {
         return dataList;
     }
 
-    public void InsertDataFromArryToMySql(int [] ArrayData,String tableName, String columnName)
+    public void InsertDataFromArrayToMySql(int [] ArrayData,String tableName, String columnName)
     {
         try {
             connectToMySql();

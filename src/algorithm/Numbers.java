@@ -16,6 +16,7 @@ public class Numbers {
 	 */
 	public static void main(String[] args) throws Exception {
 
+
 		int [] num = new int[100];
 
 		Random rand = new Random();
@@ -29,7 +30,7 @@ public class Numbers {
 		algo.selectionSort(num);
 		long selectionSortExecutionTime = algo.executionTime;
 		System.out.println("Total Execution Time of "+ num.length + " numbers in Selection Sort take: " + selectionSortExecutionTime + " milli sec");
-		connectDB.InsertDataFromArryToMySql(num, "selection_sort", "SortingNumbers");
+		connectDB.InsertDataFromArrayToMySql(num, "selection_sort", "SortingNumbers");
 		List<String> numbers = connectDB.readDataBase("selection_sort", "SortingNumbers");
 		for(String st:numbers){
 			System.out.println(st);

@@ -7,7 +7,7 @@ import java.util.List;
 
 public class LowestNumber {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		/*
 		 * Write java solution to find the lowest number from this array.
 		 * Use one of the databases from mysql or mongodb to store and to retrieve.
@@ -28,7 +28,7 @@ public class LowestNumber {
 
 		List<String> lowestValue = new ArrayList<String>();
 		try {
-			connectDB.InsertDataFromArryToMySql(array, "tbl_lowestNumber", "column_lowestNumber");
+			connectDB.InsertDataFromArrayToMySql(array, "tbl_lowestNumber", "column_lowestNumber");
 			lowestValue = connectDB.readDataBase("tbl_lowestNumber", "column_lowestNumber");
 
 		} catch (Exception e) {
